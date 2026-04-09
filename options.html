@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LinkedIn to Sheets Settings</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 16px;
+        color: #1f1f1f;
+      }
+      h1 {
+        font-size: 18px;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+      input {
+        width: 100%;
+        max-width: 720px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      }
+      button {
+        margin-top: 12px;
+        background: #0a66c2;
+        color: white;
+        border: none;
+        border-radius: 999px;
+        padding: 8px 14px;
+        cursor: pointer;
+      }
+      .hint {
+        margin-top: 6px;
+        color: #555;
+        font-size: 13px;
+      }
+      #status {
+        margin-top: 10px;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>LinkedIn to Google Sheets</h1>
+    <label for="webhook">Google Apps Script Web App URL</label>
+    <input id="webhook" type="url" placeholder="https://script.google.com/macros/s/.../exec" />
+    <div class="hint">Paste your deployed Apps Script Web App URL, then click Save.</div>
+    <button id="save">Save</button>
+    <div id="status"></div>
+
+    <script src="options.js"></script>
+  </body>
+</html>
