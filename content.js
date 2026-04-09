@@ -14,11 +14,11 @@
   }
 
   function getProfileHeading() {
-    return (
-      document.querySelector('main h1') ||
-      document.querySelector('.pv-text-details__left-panel h1') ||
-      document.querySelector('h1')
-    );
+    const candidates = [
+      ...document.querySelectorAll('main h1, main h2, .pv-text-details__left-panel h1, .pv-text-details__left-panel h2, h1, h2')
+    ].filter((el) => (el.textContent || '').trim().length > 0);
+
+    return candidates[0] || null;
   }
 
   function getEmailFromPage() {
