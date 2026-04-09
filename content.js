@@ -4,15 +4,21 @@
   const DOTLOTTIE_SCRIPT_ID = 'linktosheets-dotlottie-script';
 
   function ensureDotLottieScript() {
-    if (document.getElementById(DOTLOTTIE_SCRIPT_ID)) {
-      return;
-    }
+    if (document.getElementById(DOTLOTTIE_SCRIPT_ID)) return;
 
     const script = document.createElement('script');
     script.id = DOTLOTTIE_SCRIPT_ID;
     script.src = 'https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.10/dist/dotlottie-wc.js';
     script.type = 'module';
     document.head.appendChild(script);
+  }
+
+  function getProfileHeading() {
+    return (
+      document.querySelector('main h1') ||
+      document.querySelector('.pv-text-details__left-panel h1') ||
+      document.querySelector('h1')
+    );
   }
 
   function getEmailFromPage() {
@@ -24,7 +30,7 @@
   }
 
   function getProfileData() {
-    const nameEl = document.querySelector('h1');
+    const nameEl = getProfileHeading();
     const name = nameEl?.textContent?.trim() || '';
     const profileUrl = window.location.href.split('?')[0];
     const email = getEmailFromPage();
@@ -56,9 +62,8 @@
   }
 
   function showButton() {
-    const nameEl = document.querySelector('h1');
+    const nameEl = getProfileHeading();
     if (!nameEl) return;
-
     if (document.getElementById(WRAPPER_ID)) return;
 
     ensureDotLottieScript();
@@ -92,11 +97,7 @@
       const payload = getProfileData();
 
       chrome.runtime.sendMessage(
-        {
-          type: 'send-to-sheets',
-          webhookUrl,
-          payload
-        },
+        { type: 'send-to-sheets', webhookUrl, payload },
         (response) => {
           if (chrome.runtime.lastError) {
             button.disabled = false;
@@ -118,17 +119,11 @@
 
     wrapper.appendChild(button);
     wrapper.appendChild(status);
-    nameEl.insertAdjacentElement('afterend', wrapper);
+    nameEl.appendChild(wrapper);
   }
 
-  const observer = new MutationObserver(() => {
-    showButton();
-  });
-
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
+  const observer = new MutationObserver(showButton);
+  observer.observe(document.body, { childList: true, subtree: true });
 
   showButton();
 })();

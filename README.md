@@ -22,6 +22,13 @@ When clicked, it captures profile data and sends it to your Google Sheet through
 3. Click **Load unpacked**
 4. Select this folder (`/workspace/linktosheets`)
 
+### Important for Incognito / InPrivate
+If you test LinkedIn in Incognito/InPrivate mode, open the extension card in `chrome://extensions` and enable:
+- **Allow in Incognito** (Chrome)
+- **Allow in InPrivate** (Edge)
+
+Without this setting, content scripts do not run and the **+** button will not appear.
+
 ## Configure
 1. Open extension details and click **Extension options**
 2. Paste your deployed Google Apps Script Web App URL
@@ -31,6 +38,12 @@ When clicked, it captures profile data and sends it to your Google Sheet through
 1. Open any LinkedIn profile URL (`https://www.linkedin.com/in/...`)
 2. Click the small `+` next to the profile name
 3. On success, the `+` is replaced with a small looping Lottie tick animation
+
+## Troubleshooting
+- Reload the extension after code changes.
+- Refresh the LinkedIn tab after loading the extension.
+- Verify you are on a profile URL (`/in/`).
+- In Incognito/InPrivate, ensure extension access is enabled.
 
 ## Notes
 - Keep usage compliant with LinkedIn policies and your own legal/privacy obligations.
